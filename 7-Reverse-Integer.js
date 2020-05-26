@@ -16,7 +16,8 @@ var reverse = function(x) {
     })
     nums = +(nums.join(''))
     if (inc) {
-        return -nums
+        nums = -nums
     }
+    if (nums < -Math.pow(2, 31) || nums > (Math.pow(2, 31) - 1)) return 0
     return nums
 }
