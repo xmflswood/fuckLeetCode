@@ -2,7 +2,7 @@
  * @param {number[]} nums
  * @return {number[][]}
  */
-// 动态规划做，好一点的做法用dfs 
+// 动态规划做
 // https://leetcode-cn.com/problems/permutations/solution/chou-xiang-cheng-jue-ce-shu-yi-ge-pai-lie-jiu-xian/
 var permute = function(nums) {
     function _(ar) {
@@ -27,5 +27,23 @@ var permute = function(nums) {
       return r
     }
     return _(nums)
-    
+};
+// 经典回溯
+var permute = function(nums) {
+  let length = nums.length
+  let r = []
+  function backtrack(tempPath) {
+    if (tempPath.length === length) {
+      return r.push(tempPath)
+    }
+    for (let i = 0; i < length; i++) {
+      if (!tempPath.includes(nums[i])) {
+        tempPath.push(nums[i])
+        backtrack(tempPath.slice())
+        tempPath.pop()
+      }
+    }
+  }
+  backtrack([])
+  return r
 };
