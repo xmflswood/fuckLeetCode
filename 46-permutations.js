@@ -13,7 +13,6 @@ var permute = function(nums) {
       let pre = _(news)
       pre.forEach(item => {
         for(let i = 0; i < (item.length + 1); i ++) {
-          debugger
           let j = []
           let l = item.slice(i)
           for (let k = 0; k < i; k++) {
