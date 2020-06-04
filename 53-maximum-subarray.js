@@ -2,18 +2,13 @@
  * @param {number[]} nums
  * @return {number}
  */
-var a = [-2,1,-3,4,-1,2,1,-5,4]
+// 动态规划，以i为末端的子序和，为 f(i - 1) + i / i 取大值
 var maxSubArray = function(nums) {
-    let max = 0
-    function _(n) {
-        if (!n) return 0
-        if (n === 1) return nums[0]
-        let last = nums[n - 1]
-        let pref = _(n - 1)
-        if (last + pref > last) return last + pref
-        return last
+    let max = nums[0]
+    let pre = 0
+    for (let i = 0; i < nums.length; i++) {
+        pre = Math.max(pre + nums[i], nums[i])
+        max = Math.max(max, pre)
     }
-    max = _(nums.length)
     return max
 };
-console.log(maxSubArray(a))
