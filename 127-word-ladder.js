@@ -4,6 +4,9 @@
  * @param {string[]} wordList
  * @return {number}
  */
+a = "qa"
+b = "sq"
+c = ["si","go","se","cm","sh","co","ga","li","ha","hz","no","bi","di","hi","qa","pi","os","uh","wm","an","me","mo","na","la","st","er","sc","ne","mn","mi","am","ex","pt","io","be","fm","ta","tb","ni","mr","pa","he","lr","sq","ye"]
 var ladderLength = function(beginWord, endWord, wordList) {
     let min = 0
     if (!wordList.includes(endWord)) return 0
@@ -39,3 +42,5 @@ function getNext(str, dict) {
     }
     return r
 }
+// console.log(ladderLength(a, b, c))
+console.log(getNext(a, c))
