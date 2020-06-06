@@ -3,7 +3,6 @@
  * @param {string} s
  * @return {boolean}
  */
-// 缺少一些判断 不过大致意思对了即可
 var isValid = function(s) {
     let left = {'(': ')', '[': ']', '{': '}'}
     let a = []
