@@ -1,31 +1,40 @@
+// https://leetcode.com/problems/word-ladder/submissions/
 /**
  * @param {string} beginWord
  * @param {string} endWord
  * @param {string[]} wordList
  * @return {number}
  */
-a = "qa"
-b = "sq"
-c = ["si","go","se","cm","sh","co","ga","li","ha","hz","no","bi","di","hi","qa","pi","os","uh","wm","an","me","mo","na","la","st","er","sc","ne","mn","mi","am","ex","pt","io","be","fm","ta","tb","ni","mr","pa","he","lr","sq","ye"]
+// 学到了BFS 用队列的思想
 var ladderLength = function(beginWord, endWord, wordList) {
     let min = 0
+    let length = 1
     if (!wordList.includes(endWord)) return 0
-    function backtrack(str, tempPath) {
-        if (endWord === str) {
-            if (tempPath.length < min || !min) {
-                return min = tempPath.length + 1
+    function bfs() {
+        let queue = [beginWord]
+        let index = 0
+        let record = [1]
+        while(queue.length > 0) {
+            let str = queue.shift()
+            let next = getNext(str, wordList)
+            if (record[index + 1] === undefined) {
+                record[index + 1] = 0
+            }
+            for (let i = 0; i < next.length; i++) {
+                if (next[i] === endWord) {
+                    return min = length + 1
+                }
+                record[index + 1]++
+                queue.push(next[i])
+            }
+            record[index]--
+            if (record[index] === 0) {
+                length++
+                index++
             }
         }
-        let next = getNext(str, wordList)
-        next.forEach(i => {
-            if (!tempPath.includes(i)) {
-                tempPath.push(str)
-                backtrack(i, tempPath)
-                tempPath.pop()
-            }
-        })
     }
-    backtrack(beginWord, [])
+    bfs()
     return min
 };
 function getNext(str, dict) {
@@ -38,9 +47,12 @@ function getNext(str, dict) {
             }
             if (x === 2) break
         }
-        if (x === 1) r.push(dict[i])
+        if (x === 1) {
+            // 直接从字典中拔掉
+            r.push(dict[i])
+            dict.splice(i, 1)
+            i--
+        }
     }
     return r
 }
-// console.log(ladderLength(a, b, c))
-console.log(getNext(a, c))
